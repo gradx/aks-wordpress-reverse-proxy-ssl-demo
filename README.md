@@ -1,6 +1,6 @@
-# AKS WordPress/Nginx Reverse Proxy + LetsEncrypt SSL Demo
+# Azure Kubernetes Service + WordPress/Nginx Reverse Proxy + LetsEncrypt SSL Demo
 
-## In this demo
+## Simplified to 8 steps 
 - Install Kubernetes
 - Login into AKS cluster
 - Install Cert Manager
@@ -64,12 +64,18 @@ kubectl apply -f wordpress-deployment.yaml
 
 #### Update DNS
 ```console
-kubectl get ingress
+kubectl get svc -n ingress-nginx
 ```
 - Find the external IP address of the ingress-nginx-controller
+  
+  ![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/0aa78046-1bb3-40c6-914f-ed5b499b73cf)
 - Add an A record in your DNS
+  
+![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/ea408b27-4874-4364-9557-d52021787b19)
 
-#### Demo Complete
+---
+
+# Demo Complete
 ![Here](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/blob/main/docs/Example.png)
 
 
