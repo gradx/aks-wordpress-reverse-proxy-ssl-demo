@@ -38,9 +38,7 @@ oud/deploy.yaml
 ```
 
 #### Create Let's Encrypt Cluster Issuer
-```console
-kubectl apply -f cluster-prod.yaml` and `kubectl apply -f cluster-staging.yaml
-```
+`kubectl apply -f cluster-prod.yaml` and `kubectl apply -f cluster-staging.yaml`
 
 #### Deploy WordPress + MariaDB
 ```console
