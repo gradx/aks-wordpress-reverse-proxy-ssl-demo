@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      securityContext:
+        runAsUser: 1
+#        runAsGroup: 0
+        fsGroup: 0
+      containers:
+#      - image: luxurai.azurecr.io/wordpress-nginx:latest
+      - image: bitnami/wordpress-nginx:latest
+        imagePullPolicy: Always
+        name: wordpress
+        env:
+#        - name: ALLOW_EMPTY_PASSWORD
+#          value: "yes"
+        - name: WORDPRESS_DATABASE_USER
+          value: yonet
+        - name: WORDPRESS_DATABASE_PASSWORD
+          value: yonet
+        - name: WORDPRESS_DATABASE_NAME
+          value: yonet
+        - name: WORDPRESS_DATABASE_HOST
+          value: mariadb
+        - name: WORDPRESS_ENABLE_REVERSE_PROXY
+          value: "yes"
+        - name: WORDPRESS_ENABLE_HTTPS
+          value: "yes"
+        - name: WORDPRESS_USERNAME
+          value: yonet
+        - name: WORDPRESS_PASSWORD
+          value: yonet
+        ports:
+        - containerPort: 8443
+        - containerPort: 8080
+          name: wordpress
+        volumeMounts:
+        - name: wordpress-data
+          mountPath: /bitnami/wordpress
+      volumes:
+      - name: wordpress-data
+        persistentVolumeClaim:
+          claimName: wordpress
+      imagePullSecrets:
+      - name: luxurai-auth

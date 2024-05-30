@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb
+          ports:
+            - containerPort: 3306
+              name: mariadb
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              value: yonet
+            - name: MARIADB_USER
+              value: yonet
+            - name: MARIADB_PASSWORD
+              value: yonet
+            - name: MARIADB_DATABASE
+              value: yonet
+          volumeMounts:
+            - name: mariadb-persistence
+              mountPath: /bitnami/mariadb
+      volumes:
+        - name: mariadb-persistence
+          persistentVolumeClaim:
+            claimName: mariadb

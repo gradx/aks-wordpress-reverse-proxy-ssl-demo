@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  annotations:
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+    nodePort: 31162
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: wpadmin
+    nodePort: 31163
+  - port: 443
+    targetPort: 8443
+    protocol: TCP
+    name: https
+    nodePort: 31164
+  selector:
+    app: wordpress
+  type: LoadBalancer
