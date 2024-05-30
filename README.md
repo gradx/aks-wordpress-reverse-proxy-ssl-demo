@@ -79,7 +79,7 @@ kubectl get ingress
         - name: WORDPRESS_ENABLE_HTTPS
           value: "yes"
 ```
-- SecurityContext resolves permissions issues with writing to the volumeMount  /bitnami/wordpress
+- SecurityContext resolves permissions issues writing wp-config.php to the volumeMount `/bitnami/wordpress`
 ```yaml
     spec:
       securityContext:
