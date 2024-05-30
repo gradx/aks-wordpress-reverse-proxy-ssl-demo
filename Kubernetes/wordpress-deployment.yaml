@@ -17,16 +17,12 @@ spec:
     spec:
       securityContext:
         runAsUser: 1
-#        runAsGroup: 0
         fsGroup: 0
       containers:
-#      - image: luxurai.azurecr.io/wordpress-nginx:latest
       - image: bitnami/wordpress-nginx:latest
         imagePullPolicy: Always
         name: wordpress
         env:
-#        - name: ALLOW_EMPTY_PASSWORD
-#          value: "yes"
         - name: WORDPRESS_DATABASE_USER
           value: yonet
         - name: WORDPRESS_DATABASE_PASSWORD
@@ -54,5 +50,3 @@ spec:
       - name: wordpress-data
         persistentVolumeClaim:
           claimName: wordpress
-      imagePullSecrets:
-      - name: luxurai-auth
