@@ -66,3 +66,27 @@ kubectl get ingress
 
 #### Demo Complete
 ![Here](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/blob/main/docs/Example.png)
+
+
+---
+
+### Lessons Learned
+- `--aad-admin-group-object-ids` is required for Entra ID access
+- Bitnami supports these settings to resolve infinite loop redirect issues with [HTTP_X_FORWARDED_PROTO](https://developer.wordpress.org/advanced-administration/security/https/)
+```yaml
+        - name: WORDPRESS_ENABLE_REVERSE_PROXY
+          value: "yes"
+        - name: WORDPRESS_ENABLE_HTTPS
+          value: "yes"
+```
+- SecurityContext resolves permissions issues with writing to the volumeMount  /bitnami/wordpress
+```yaml
+    spec:
+      securityContext:
+        runAsUser: 1
+        fsGroup: 0
+```
+- Annotations can vary to fix Nginx `client_max_body_size` based on your ingress nginx [controller](https://stackoverflow.com/a/73548785)
+```yaml
+    nginx.ingress.kubernetes.io/proxy-body-size: 80m
+```
