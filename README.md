@@ -76,7 +76,7 @@ kubectl get ingress
 ---
 
 ### Lessons Learned
-- `--aad-admin-group-object-ids` is required for Entra ID access
+- `--aad-admin-group-object-ids` is required for [Entra](https://learn.microsoft.com/en-us/azure/aks/enable-authentication-microsoft-entra-id#non-interactive-sign-in-with-kubelogin) ID access
 - Bitnami supports these settings to resolve infinite loop redirect issues with [HTTP_X_FORWARDED_PROTO](https://developer.wordpress.org/advanced-administration/security/https/)
 ```yaml
         - name: WORDPRESS_ENABLE_REVERSE_PROXY
@@ -95,3 +95,5 @@ kubectl get ingress
 ```yaml
     nginx.ingress.kubernetes.io/proxy-body-size: 80m
 ```
+- Use of a [static](https://learn.microsoft.com/en-us/azure/aks/static-ip) IP for the ingress nginx controller is a best practice
+- A [DaemonSet](https://techcommunity.microsoft.com/t5/azure-stack-blog/notes-from-the-field-nginx-ingress-controller-for-production-on/ba-p/3781350) ingress configuration is sometimes recommended
