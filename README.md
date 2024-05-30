@@ -2,6 +2,7 @@
 
 ## In this demo
 - Install Kubernetes
+- Login into AKS cluster
 - Install Cert Manager
 - Install Ingress Nginx Controller
 - Create Lets Encrypt SSL Cluster Issuer
@@ -24,6 +25,12 @@ az aks create \
     --enable-oidc-issuer \
     --enable-aad \
     --aad-admin-group-object-ids 65e4b1b3-ccc2-4697-bf33-d006405c6a88
+```
+### Login into AKS Cluster
+```console
+az aks get-credentials --resource-group networkwatcherrg --name yokubix
+export KUBECONFIG=~/kube.config
+kubelogin convert-kubeconfig -l azurecli
 ```
 
 #### Install Cert Manager
