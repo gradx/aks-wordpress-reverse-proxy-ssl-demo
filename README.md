@@ -1,14 +1,13 @@
 # Azure Kubernetes Service + WordPress/Nginx Reverse Proxy + LetsEncrypt SSL Demo
 
-## Simplified to 8 steps 
+## Simplified to 7 steps 
 - Install Kubernetes
 - Login into AKS cluster
 - Install Cert Manager
 - Install Ingress Nginx Controller
-- Create Lets Encrypt SSL Cluster Issuer
-- Deploy MariaDB
-- Deploy Bitnami WordPress/Nginx
 - Update DNS Provider with A record resolving to the ingress-nginx controller
+- Create Lets Encrypt SSL Cluster Issuer
+- Deploy WordPress/Nginx + MariaDB
 
 #### Install Kubernetes
 ```console
@@ -26,7 +25,7 @@ az aks create \
     --enable-aad \
     --aad-admin-group-object-ids 65e4b1b3-ccc2-4697-bf33-d006405c6a88
 ```
-### Login into AKS Cluster
+#### Login into AKS Cluster
 ```console
 az aks get-credentials --resource-group networkwatcherrg --name yokubix
 export KUBECONFIG=~/kube.config
@@ -44,10 +43,21 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 oud/deploy.yaml
 ```
 
+#### Update DNS Provider with A record resolving to the ingress-nginx controller
+```console
+kubectl get svc -n ingress-nginx
+```
+- Find the external IP address of the ingress-nginx-controller
+  
+  ![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/0aa78046-1bb3-40c6-914f-ed5b499b73cf)
+- Add an A record in your DNS
+  
+![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/ea408b27-4874-4364-9557-d52021787b19)
+
 #### Create Let's Encrypt Cluster Issuer
 `kubectl apply -f cluster-prod.yaml` and `kubectl apply -f cluster-staging.yaml`
 
-#### Deploy WordPress + MariaDB
+#### Deploy WordPress/Nginx + MariaDB
 ```console
 kubectl apply -f mariadb-volume.yaml
 kubectl apply -f mariadb-claim.yaml
@@ -61,17 +71,6 @@ kubectl apply -f wordpress-service.yaml
 kubectl apply -f wordpress-deployment.yaml
 ```
 - **IMPORTANT** Update settings, especially in mariadb-deployment and wordpress-deployment.yaml
-
-#### Update DNS
-```console
-kubectl get svc -n ingress-nginx
-```
-- Find the external IP address of the ingress-nginx-controller
-  
-  ![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/0aa78046-1bb3-40c6-914f-ed5b499b73cf)
-- Add an A record in your DNS
-  
-![image](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/assets/7133215/ea408b27-4874-4364-9557-d52021787b19)
 
 ---
 
