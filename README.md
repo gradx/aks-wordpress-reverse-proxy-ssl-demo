@@ -55,6 +55,7 @@ kubectl apply -f wordpress-ingress.yaml
 kubectl apply -f wordpress-service.yaml
 kubectl apply -f wordpress-deployment.yaml
 ```
+- **IMPORTANT** Update settings, especially in mariadb-deployment and wordpress-deployment.yaml
 
 #### Update DNS
 ```console
@@ -62,3 +63,6 @@ kubectl get ingress
 ```
 - Find the external IP address of the ingress-nginx-controller
 - Add an A record in your DNS
+
+#### Demo Complete
+![Here](https://github.com/gradx/aks-wordpress-reverse-proxy-ssl-demo/blob/main/docs/Example.png)
