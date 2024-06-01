@@ -14,8 +14,8 @@ A 7 step kismet with 6 lessons learned revisiting some prior work:
 #### Install Kubernetes
 ```console
 az aks create \
-    --resource-group networkwatcherrg \
-    --subscription Yearly \
+    --resource-group <ResourceGroup> \
+    --subscription <SubscriptionName> \
     --name yokubix \
     --location eastus2 \
     --node-vm-size Standard_D2s_v3 \
