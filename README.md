@@ -25,7 +25,7 @@ az aks create \
     --enable-workload-identity \
     --enable-oidc-issuer \
     --enable-aad \
-    --aad-admin-group-object-ids 65e4b1b3-ccc2-4697-bf33-d006405c6a88
+    --aad-admin-group-object-ids <Entra_Group_Id>
 ```
 #### Login into AKS Cluster
 ```console
