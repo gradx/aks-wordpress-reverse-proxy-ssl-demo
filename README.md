@@ -1,7 +1,5 @@
 # Azure Kubernetes Service + WordPress/Nginx Reverse Proxy + LetsEncrypt SSL Demo
 
-A 7 step kismet with 6 lessons learned revisiting some prior work:
-
 ## Seven Simple Steps -- the "*SSS*" S-stack
 - Install Kubernetes
 - Login into AKS cluster
