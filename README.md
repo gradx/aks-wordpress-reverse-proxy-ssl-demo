@@ -1,5 +1,7 @@
 # Azure Kubernetes Service + WordPress/Nginx Reverse Proxy + LetsEncrypt SSL Demo
 
+![GitHub License](https://img.shields.io/github/license/gradx/aks-wordpress-reverse-proxy-ssl-demo)
+
 ## Seven Simple Steps -- the "*SSS*" S-stack
 - Install Kubernetes
 - Login into AKS cluster
